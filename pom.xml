@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>sharpen</groupId>
-  <artifactId>sharpencore</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>sharpen</groupId>
+    <artifactId>sharpencore</artifactId>
+    <version>${version.major}.${version.minor}.${version.patch}-${build.number}</version>
+    <packaging>jar</packaging>
 
-  <name>sharpencore</name>
-  <url>https://github.com/imazen/sharpen</url>
+    <name>sharpencore</name>
+    <url>https://github.com/imazen/sharpen</url>
     <organization>
         <name>Imazen</name>
         <url>http://www.imazen.io</url>
@@ -75,93 +75,125 @@
         <!--</site>-->
     <!--</distributionManagement>-->
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   <finalName>${project.artifactId}-${project.version}</finalName>
-  </properties>
+    <properties>
+        <language>java</language>
+        <java.version>1.8</java.version>
+        <build.number>SNAPSHOT</build.number>
+        <version.major>0</version.major>
+        <version.minor>1</version.minor>
+        <version.patch>0</version.patch>
 
-  <dependencies>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <archiveClasses>true</archiveClasses>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.jdt</groupId>
+            <artifactId>org.eclipse.jdt.core</artifactId>
+            <version>3.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>runtime</artifactId>
+            <version>3.10.0-v20140318-2214</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.equinox</groupId>
+            <artifactId>common</artifactId>
+            <version>3.6.200-v20130402-1505</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi</artifactId>
+            <version>3.6.0.v20100517</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>apk-parser</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>${javaLanguage.version}</source>
+                    <target>${javaLanguage.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     
-    <dependency>
-      <groupId>org.eclipse.jdt</groupId>
-      <artifactId>org.eclipse.jdt.core</artifactId>
-      <version>3.7.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.core</groupId>
-      <artifactId>runtime</artifactId>
-      <version>3.10.0-v20140318-2214</version>
-    </dependency>
-     <dependency>
-      <groupId>org.eclipse.equinox</groupId>
-      <artifactId>common</artifactId>
-      <version>3.6.200-v20130402-1505</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.osgi</groupId>
-      <artifactId>org.eclipse.osgi</artifactId>
-      <version>3.6.0.v20100517</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.4</version>
-      <scope>test</scope>
-    </dependency>
-    
-  </dependencies>
-  
-  <build>
-    <directory>src/target</directory>
-    <outputDirectory>src/target/classes</outputDirectory>
-    <finalName>${finalName}</finalName>
-    <testOutputDirectory>src/target/testcases</testOutputDirectory>
-    <sourceDirectory>src/main</sourceDirectory>
-    <scriptSourceDirectory>src/main/resources</scriptSourceDirectory>
-    <testSourceDirectory>src/test</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>src/test/resources</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-      </testResource>
-    </testResources>
-    
-    <plugins>
-      
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>sharpen.core.SharpenCmd</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id> <!-- this is used for inheritance merges -->
-            <phase>package</phase> <!-- bind to the packaging phase -->
-            <goals>
-            <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-    </plugins>
-   
-  </build>
-
-  <profiles>
-    <profile>
+    <profiles>
+        <profile>
         <!--
         Static quality analysis with Qulice and other tools.
         This profile is supposed to be activated in continuous
@@ -171,10 +203,10 @@
         code and the SCM repository.
         @see http://www.jcabi.com/jcabi-parent/profile-qulice.html
         -->
-        <id>qulice</id>
-        <build>
-            <plugins>
-                <plugin>
+            <id>qulice</id>
+            <build>
+                <plugins>
+                    <plugin>
                     <!--
                     Qulice-maven-plugin is a compound static analysis
                     tool that aggregates Checkstyle, PMD, FindBugs,
@@ -183,24 +215,24 @@
                     most important rules.
                     @see http://www.qulice.com/qulice-maven-plugin/
                     -->
-                    <groupId>com.qulice</groupId>
-                    <artifactId>qulice-maven-plugin</artifactId>
-                    <version>0.12</version>
-                    <executions>
-                        <execution>
-                            <id>sharpen-check</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                            <configuration>
-                                <license>file:${basedir}/LICENSE.txt</license>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
-    </profile>
-  </profiles>
+                        <groupId>com.qulice</groupId>
+                        <artifactId>qulice-maven-plugin</artifactId>
+                        <version>0.12</version>
+                        <executions>
+                            <execution>
+                                <id>sharpen-check</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <license>file:${basedir}/LICENSE.txt</license>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

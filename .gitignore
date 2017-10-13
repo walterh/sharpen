@@ -3,7 +3,9 @@ bin-testcases/
 target/
 *.class
 *.byecycle
-
+.classpath
+.project
+.settings/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
